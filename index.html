@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#4fc3f7">
+  <title>Mi Agua 💧</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, #dff6ff, #ffffff);
+      color: #174a63;
+      min-height: 100vh;
+    }
+
+    .app {
+      max-width: 520px;
+      margin: auto;
+      padding: 25px 18px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 38px;
+      margin: 10px 0;
+    }
+
+    .subtitle {
+      font-size: 18px;
+      margin-bottom: 25px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 25px;
+      padding: 25px;
+      margin: 18px 0;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.10);
+    }
+
+    .glass {
+      font-size: 55px;
+      margin: 10px;
+    }
+
+    .amount {
+      font-size: 30px;
+      font-weight: bold;
+      margin: 10px;
+    }
+
+    .progress-container {
+      width: 100%;
+      height: 22px;
+      background: #e4f1f5;
+      border-radius: 20px;
+      overflow: hidden;
+      margin: 20px 0;
+    }
+
+    .progress {
+      height: 100%;
+      width: 0%;
+      background: #4fc3f7;
+      border-radius: 20px;
+      transition: 0.3s;
+    }
+
+    button {
+      border: none;
+      border-radius: 18px;
+      padding: 16px 25px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      background: #4fc3f7;
+      color: white;
+      margin: 7px;
+    }
+
+    button:hover {
+      opacity: 0.85;
+    }
+
+    .reset {
+      background: #90a4ae;
+    }
+
+    .reminder {
+      font-size: 18px;
+      line-height: 1.5;
+    }
+
+    .success {
+      font-weight: bold;
+      min-height: 25px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="app">
+
+    <h1>💧 Mi Agua</h1>
+    <div class="subtitle">
+      ¡Recuerda mantenerte hidratado!
+    </div>
+
+    <div class="card">
+
+      <div class="glass">🥤</div>
+
+      <div class="amount">
+        <span id="current">0</span> / <span id="goal">6</span> vasos
+      </div>
+
+      <div class="progress-container">
+        <div class="progress" id="progress"></div>
+      </div>
+
+      <p>
+        Te faltan <strong><span id="remaining">6</span></strong> vasos.
+      </p>
+
+      <button onclick="addWater()">
+        💧 Tomé un vaso
+      </button>
+
+      <button class="reset" onclick="resetWater()">
+        🔄 Reiniciar
+      </button>
+
+      <p class="success" id="message"></p>
+
+    </div>
+
+    <div class="card reminder">
+
+      <h2>⏰ Recordatorio</h2>
+
+      <p>
+        Es importante recordar tomar agua durante el día.
+      </p>
+
+      <p>
+        🔔 Próximo recordatorio:
+        <strong id="time">--:--</strong>
+      </p>
+
+      <button onclick="setReminder()">
+        🔔 Activar recordatorio
+      </button>
+
+    </div>
+
+  </div>
+
+  <script>
+
+    let current = 0;
+    const goal = 6;
+
+    function updateScreen() {
+
+      document.getElementById("current").textContent = current;
+
+      document.getElementById("remaining").textContent =
+        Math.max(goal - current, 0);
+
+      let percentage = Math.min((current / goal) * 100, 100);
+
+      document.getElementById("progress").style.width =
+        percentage + "%";
+
+      if (current >= goal) {
+
+        document.getElementById("message").textContent =
+          "🎉 ¡Meta cumplida! ¡Muy bien!";
+
+      } else {
+
+        document.getElementById("message").textContent =
+          "";
+
+      }
+    }
+
+    function addWater() {
+
+      if (current < goal) {
+        current++;
+      }
+
+      updateScreen();
+    }
+
+    function resetWater() {
+
+      current = 0;
+
+      updateScreen();
+    }
+
+    function setReminder() {
+
+      const now = new Date();
+
+      now.setMinutes(now.getMinutes() + 60);
+
+      const hours =
+        String(now.getHours()).padStart(2, "0");
+
+      const minutes =
+        String(now.getMinutes()).padStart(2, "0");
+
+      document.getElementById("time").textContent =
+        hours + ":" + minutes;
+
+      alert(
+        "🔔 Recordatorio activado. Recuerda tomar agua."
+      );
+    }
+
+    updateScreen();
+
+  </script>
+
+</body>
+</html>
