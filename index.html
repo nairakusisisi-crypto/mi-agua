@@ -6,1735 +6,656 @@
 <title>AquaCoin 💧</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
-
-body{
-  background:#eaf8ff;
-  color:#173247;
-  min-height:100vh;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
 }
 
-button{
-  border:0;
-  border-radius:14px;
-  padding:11px 16px;
-  cursor:pointer;
-  font-weight:bold;
+body {
+  background: #eaf8ff;
+  color: #16445c;
 }
 
-.hidden{display:none!important}
-
-.primary{
-  background:#078fd1;
-  color:white;
-  width:100%;
+header {
+  background: #55c9ee;
+  padding: 18px;
+  text-align: center;
+  color: white;
+  font-size: 26px;
+  font-weight: bold;
 }
 
-.secondary{
-  background:#dff4ff;
-  color:#0877aa;
+nav {
+  display: flex;
+  justify-content: space-around;
+  background: white;
+  padding: 12px;
+  position: sticky;
+  bottom: 0;
+  box-shadow: 0 -2px 10px #0002;
 }
 
-.card{
-  background:white;
-  padding:22px;
-  border-radius:22px;
-  margin-bottom:18px;
-  box-shadow:0 4px 18px #55a9c622;
+nav button {
+  border: none;
+  background: none;
+  font-size: 14px;
+  color: #16445c;
+  cursor: pointer;
 }
 
-.center{text-align:center}
-
-h1,h2,h3{color:#087bb5}
-
-/* INICIO */
-
-#splash{
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  color:white;
-  background:linear-gradient(180deg,#079de2,#bdefff);
+main {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  padding-bottom: 90px;
 }
 
-.logo{
-  font-size:48px;
-  font-weight:900;
-  letter-spacing:2px;
+.screen {
+  display: none;
 }
 
-.luminece-big{
-  font-size:110px;
-  margin:20px;
+.screen.active {
+  display: block;
 }
 
-/* LOGIN */
-
-#login{
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:20px;
+.card {
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+  margin: 15px 0;
+  box-shadow: 0 4px 12px #0001;
 }
 
-.login-card{
-  background:white;
-  width:min(420px,100%);
-  padding:30px;
-  border-radius:25px;
-  box-shadow:0 8px 30px #55a9c633;
-  text-align:center;
+h2 {
+  margin-bottom: 12px;
 }
 
-.login-card input{
-  width:100%;
-  padding:13px;
-  margin:7px 0;
-  border:2px solid #c9ebf8;
-  border-radius:12px;
+.big-number {
+  font-size: 45px;
+  font-weight: bold;
+  text-align: center;
+  color: #159bd0;
 }
 
-/* APP */
-
-#app{
-  padding-bottom:90px;
+button.primary {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 14px;
+  background: #22aee0;
+  color: white;
+  font-size: 17px;
+  cursor: pointer;
+  margin-top: 10px;
 }
 
-header{
-  position:sticky;
-  top:0;
-  z-index:10;
-  background:#078fd1;
-  color:white;
-  padding:15px 20px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+button.primary:hover {
+  background: #1598c7;
 }
 
-header h2{color:white}
-
-.coins{
-  background:white;
-  color:#0877aa;
-  padding:8px 13px;
-  border-radius:20px;
-  font-weight:bold;
+.progress {
+  width: 100%;
+  height: 20px;
+  background: #d8edf5;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 12px 0;
 }
 
-main{
-  max-width:950px;
-  margin:auto;
-  padding:20px;
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: #22aee0;
+  transition: 0.4s;
 }
 
-.page{display:none}
-.page.active{display:block}
-
-.luminece{
-  font-size:105px;
-  margin:10px;
+input {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border: 2px solid #c9e9f4;
+  border-radius: 12px;
+  font-size: 16px;
 }
 
-.big-number{
-  font-size:38px;
-  color:#078fd1;
-  font-weight:bold;
+.game {
+  text-align: center;
 }
 
-.progress{
-  height:18px;
-  background:#d7f1fb;
-  border-radius:20px;
-  overflow:hidden;
-  margin:15px 0;
+#gameArea {
+  height: 280px;
+  background: #dff6ff;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  margin-top: 15px;
 }
 
-.progress-bar{
-  height:100%;
-  width:0;
-  background:#079ddd;
-  transition:.3s;
+.waterDrop {
+  position: absolute;
+  font-size: 35px;
+  cursor: pointer;
+  user-select: none;
 }
 
-.stats{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
+.timer {
+  font-size: 32px;
+  font-weight: bold;
+  color: #159bd0;
 }
 
-.stat{
-  background:white;
-  padding:18px;
-  border-radius:18px;
-  text-align:center;
+.stat {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
 }
 
-.stat strong{
-  display:block;
-  font-size:26px;
-  color:#087bb5;
+.profile {
+  text-align: center;
 }
 
-/* TIENDA */
-
-.tabs{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-  margin:15px 0;
+.avatar {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: #c9f1ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 60px;
+  margin: auto auto 15px;
 }
 
-.shop-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
-  gap:15px;
+.achievement {
+  padding: 12px;
+  border-radius: 12px;
+  background: #edfaff;
+  margin: 8px 0;
 }
 
-.item{
-  background:white;
-  border-radius:20px;
-  padding:18px;
-  text-align:center;
-}
-
-.item-icon{
-  font-size:60px;
-  margin:8px;
-}
-
-.price{
-  margin:8px;
-  color:#087bb5;
-  font-weight:bold;
-}
-
-.buy{
-  background:#078fd1;
-  color:white;
-}
-
-.owned{
-  background:#bdebcf;
-  color:#176839;
-}
-
-/* ARMARIO */
-
-.wardrobe{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:18px;
-}
-
-.avatar-box{
-  background:linear-gradient(#d9f6ff,#fff);
-  min-height:420px;
-  border-radius:25px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-}
-
-.avatar{
-  font-size:115px;
-}
-
-.outfit{
-  font-size:58px;
-  margin-top:-15px;
-}
-
-.controls{
-  background:white;
-  border-radius:22px;
-  padding:20px;
-}
-
-.control{
-  margin:14px 0;
-}
-
-.control label{
-  display:block;
-  margin-bottom:6px;
-  font-weight:bold;
-}
-
-select,input[type=color],input[type=number]{
-  padding:9px;
-  border:2px solid #ccecf7;
-  border-radius:10px;
-}
-
-/* JUEGO */
-
-.game{
-  background:linear-gradient(#8ddfff,#e8faff);
-  min-height:450px;
-  border-radius:25px;
-  position:relative;
-  overflow:hidden;
-  text-align:center;
-  padding:15px;
-}
-
-.timer{
-  font-size:32px;
-  color:#087bb5;
-  font-weight:bold;
-}
-
-#gameArea{
-  position:absolute;
-  inset:80px 0 0;
-}
-
-.drop{
-  position:absolute;
-  font-size:38px;
-  cursor:pointer;
-  user-select:none;
-}
-
-#startGame{
-  position:absolute;
-  bottom:15px;
-  left:10%;
-  width:80%;
-}
-
-/* HISTORIAL */
-
-.history-row{
-  display:flex;
-  justify-content:space-between;
-  padding:12px 0;
-  border-bottom:1px solid #e1f2f8;
-}
-
-/* PERFIL */
-
-.otters{
-  display:flex;
-  gap:10px;
-  justify-content:center;
-  flex-wrap:wrap;
-  margin:20px;
-}
-
-.otter{
-  font-size:38px;
-  background:#edf9ff;
-  border:3px solid transparent;
-}
-
-.otter.selected{
-  border-color:#078fd1;
-}
-
-/* NAVEGACIÓN */
-
-nav{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  background:white;
-  display:flex;
-  justify-content:space-around;
-  z-index:20;
-  box-shadow:0 -5px 20px #55a9c633;
-  overflow-x:auto;
-}
-
-nav button{
-  background:transparent;
-  color:#0877aa;
-  font-size:11px;
-  min-width:65px;
-}
-
-nav span{
-  display:block;
-  font-size:20px;
-}
-
-@media(max-width:700px){
-  .wardrobe{grid-template-columns:1fr}
-  nav button{padding:7px 4px}
+.history-item {
+  padding: 10px;
+  border-bottom: 1px solid #d9edf3;
 }
 </style>
 </head>
 
 <body>
 
-<!-- PANTALLA INICIAL -->
-
-<section id="splash">
-  <div class="logo">AQUACOIN</div>
-  <div class="luminece-big">🐥💧</div>
-  <h2 style="color:white">¡Hola! Soy Luminece</h2>
-  <p>Tu agua · tus AquaCoins · tu Luminece</p>
-</section>
-
-<!-- LOGIN -->
-
-<section id="login" class="hidden">
-  <div class="login-card">
-
-    <h1>💧 AquaCoin</h1>
-    <p style="margin:10px">Crea tu perfil</p>
-
-    <input id="nameInput" placeholder="Nombre">
-
-    <input id="emailInput"
-           type="email"
-           placeholder="Correo electrónico">
-
-    <input id="passwordInput"
-           type="password"
-           placeholder="Contraseña">
-
-    <button class="primary" onclick="login()">
-      Crear / entrar
-    </button>
-
-    <br><br>
-
-    <button class="secondary" onclick="spectatorMode()">
-      👀 Entrar como espectador
-    </button>
-
-  </div>
-</section>
-
-<!-- APP -->
-
-<section id="app" class="hidden">
-
 <header>
-  <h2>💧 AquaCoin</h2>
-
-  <div class="coins">
-    🪙 <span id="coins">0</span>
-  </div>
+  AquaCoin 💧
 </header>
 
 <main>
 
 <!-- INICIO -->
+<section id="home" class="screen active">
 
-<section id="home" class="page active">
-
-  <div class="card center">
-
-    <div class="luminece">🐥</div>
-
-    <h2>¡Hola! Soy Luminece</h2>
-
-    <p>
-      Registra tus vasos y consigue AquaCoins.
-    </p>
-
+  <div class="card">
+    <h2>Hola 👋</h2>
+    <p>¡Ayuda a Luminece a mantenerte hidratado!</p>
   </div>
 
-  <div class="card center">
-
-    <h2>💧 Vasos de hoy</h2>
+  <div class="card">
+    <h2>💧 Agua de hoy</h2>
 
     <div class="big-number">
-      <span id="glasses">0</span>
+      <span id="water">0</span> ml
     </div>
+
+    <p style="text-align:center;">
+      Meta orientativa: <span id="goal">2000</span> ml
+    </p>
 
     <div class="progress">
       <div class="progress-bar" id="progress"></div>
     </div>
 
-    <button class="primary" onclick="drinkWater()">
-      💧 Registrar vaso
+    <button class="primary" onclick="addWater()">
+      + Agregar 250 ml 💧
+    </button>
+  </div>
+
+  <div class="card">
+    <div class="stat">
+      <span>🪙 AquaCoins</span>
+      <strong id="coins">0</strong>
+    </div>
+
+    <div class="stat">
+      <span>🔥 Racha</span>
+      <strong id="streak">1 día</strong>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- PESO -->
+<section id="weight" class="screen">
+
+  <div class="card">
+    <h2>⚖️ Tu información</h2>
+
+    <p>
+      Puedes ingresar tu peso para obtener una orientación
+      aproximada sobre hidratación. No es una meta médica.
+    </p>
+
+    <input
+      type="number"
+      id="weightInput"
+      placeholder="Peso en kg"
+      min="1"
+    >
+
+    <button class="primary" onclick="calculateWater()">
+      Calcular orientación 💧
+    </button>
+
+    <div id="weightResult" style="margin-top:15px;"></div>
+  </div>
+
+</section>
+
+
+<!-- MINIJUEGO -->
+<section id="game" class="screen">
+
+  <div class="card game">
+
+    <h2>🎮 Ayuda a Lumi</h2>
+
+    <p>
+      ¡Atrapa las gotas de agua durante 60 segundos!
+    </p>
+
+    <div class="timer">
+      <span id="gameTimer">60</span>s
+    </div>
+
+    <p>Puntos: <strong id="gameScore">0</strong></p>
+
+    <button
+      class="primary"
+      id="startGameButton"
+      onclick="startGame()"
+    >
+      Empezar juego
+    </button>
+
+    <div id="gameArea"></div>
+
+  </div>
+
+</section>
+
+
+<!-- LOGROS -->
+<section id="achievements" class="screen">
+
+  <div class="card">
+    <h2>🏆 Logros</h2>
+
+    <div class="achievement">
+      💧 Primer vaso
+      <br>
+      <small>Bebe tu primer vaso registrado.</small>
+    </div>
+
+    <div class="achievement">
+      🪙 Primeras AquaCoins
+      <br>
+      <small>Consigue tus primeras monedas.</small>
+    </div>
+
+    <div class="achievement">
+      🎮 Jugador
+      <br>
+      <small>Juega “Ayuda a Lumi”.</small>
+    </div>
+
+    <div class="achievement">
+      🔥 Constante
+      <br>
+      <small>Mantén tu racha.</small>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- HISTORIAL -->
+<section id="history" class="screen">
+
+  <div class="card">
+
+    <h2>📊 Historial</h2>
+
+    <div id="historyList">
+      <p>No hay registros todavía.</p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- PERFIL -->
+<section id="profile" class="screen">
+
+  <div class="card profile">
+
+    <div class="avatar">
+      🦦
+    </div>
+
+    <h2 id="profileName">Mi perfil</h2>
+
+    <p>Perfil de AquaCoin</p>
+
+    <br>
+
+    <input
+      type="text"
+      id="nameInput"
+      placeholder="Escribe tu nombre"
+    >
+
+    <button class="primary" onclick="saveProfile()">
+      Guardar perfil
     </button>
 
   </div>
-
-  <div class="stats">
-
-    <div class="stat">
-      🔥 Racha
-      <strong id="streak">0</strong>
-      días
-    </div>
-
-    <div class="stat">
-      🪙 AquaCoins
-      <strong id="homeCoins">0</strong>
-    </div>
-
-  </div>
-
-</section>
-
-<!-- TIENDA -->
-
-<section id="shop" class="page">
-
-<h2>🛍️ AquaCoin Shop</h2>
-
-<p>
-  Compra ropa y accesorios para Luminece.
-</p>
-
-<div class="tabs">
-
-  <button onclick="shopCategory('accessories')">
-    ✨ Accesorios
-  </button>
-
-  <button onclick="shopCategory('female')">
-    👗 Femenino
-  </button>
-
-  <button onclick="shopCategory('male')">
-    👔 Masculino
-  </button>
-
-</div>
-
-<div id="shopItems" class="shop-grid"></div>
-
-</section>
-
-<!-- ARMARIO -->
-
-<section id="wardrobe" class="page">
-
-<h2>👗 Armario de Luminece</h2>
-
-<div class="wardrobe">
-
-<div class="avatar-box">
-
-  <div class="avatar">🐥</div>
-
-  <div id="outfit" class="outfit">
-    ✨
-  </div>
-
-  <h3>Luminece</h3>
-
-</div>
-
-<div class="controls">
-
-<h3>🎨 Personalizar</h3>
-
-<div class="control">
-
-<label>Ropa</label>
-
-<select id="clothingSelect"
-        onchange="changeClothing()">
-
-<option value="none">
-Sin ropa
-</option>
-
-<option value="shirt">
-Camisa manga larga
-</option>
-
-<option value="shirt2">
-Camisa de cuello diferente
-</option>
-
-<option value="polo">
-Polo con cuello
-</option>
-
-<option value="dress1">
-Vestido 1
-</option>
-
-<option value="dress2">
-Vestido 2
-</option>
-
-<option value="topSkirt">
-Polo + falda
-</option>
-
-<option value="jacket">
-Casaca de cuero
-</option>
-
-</select>
-
-</div>
-
-<div class="control">
-
-<label>🎨 Color de la ropa</label>
-
-<input type="color"
-       id="clothingColor"
-       value="#078fd1"
-       onchange="updateOutfit()">
-
-</div>
-
-<div class="control">
-
-<label>✨ Accesorio</label>
-
-<select id="accessorySelect"
-        onchange="updateOutfit()">
-
-<option value="none">Ninguno</option>
-
-<option value="tie">Corbata</option>
-
-<option value="glasses">Lentes en la cabeza</option>
-
-<option value="bows">Dos rosones</option>
-
-<option value="float">Flotador</option>
-
-<option value="chef">Gorro de chef</option>
-
-<option value="flower">Flor</option>
-
-<option value="umbrella">Sombrilla</option>
-
-<option value="bracelets">Pulseras</option>
-
-</select>
-
-</div>
-
-<div class="control">
-
-<label>🎨 Color del accesorio</label>
-
-<input type="color"
-       id="accessoryColor"
-       value="#ff4fa3"
-       onchange="updateOutfit()">
-
-</div>
-
-<p id="customMessage"></p>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- JUEGO -->
-
-<section id="game" class="page">
-
-<h2>🎮 Ayuda a Luminece</h2>
-
-<p>
-Tienes 60 segundos para recoger gotas.
-</p>
-
-<div class="game">
-
-<div class="timer">
-⏱️ <span id="timer">60</span>
-</div>
-
-<p>
-💧 Puntos:
-<strong id="score">0</strong>
-</p>
-
-<div id="gameArea"></div>
-
-<button id="startGame"
-        class="primary"
-        onclick="startGame()">
-
-▶️ Empezar partida
-
-</button>
-
-</div>
-
-<p id="gameResult" class="center"></p>
-
-</section>
-
-<!-- LOGROS -->
-
-<section id="achievements" class="page">
-
-<h2>🏆 Logros y recompensas</h2>
-
-<div class="card">
-
-<h3>💧 Primer vaso</h3>
-
-<p>Registra tu primer vaso.</p>
-
-<strong>+10 AquaCoins</strong>
-
-</div>
-
-<div class="card">
-
-<h3>🔥 7 días</h3>
-
-<p>Consigue una racha de 7 días.</p>
-
-<strong>+50 AquaCoins</strong>
-
-</div>
-
-<div class="card">
-
-<h3>🌊 100 vasos</h3>
-
-<p>Registra 100 vasos.</p>
-
-<strong>+100 AquaCoins</strong>
-
-</div>
-
-<div class="card">
-
-<h3>🌊 500 vasos</h3>
-
-<p>Registra 500 vasos.</p>
-
-<strong>+250 AquaCoins</strong>
-
-</div>
-
-</section>
-
-<!-- RECOMPENSAS -->
-
-<section id="rewards" class="page">
-
-<h2>🎁 Recompensas</h2>
-
-<div class="card center">
-
-<div style="font-size:80px">
-🪙
-</div>
-
-<h2>
-<span id="rewardCoins">0</span>
-AquaCoins
-</h2>
-
-<p>
-Úsalas en la tienda de Luminece.
-</p>
-
-</div>
-
-</section>
-
-<!-- RECORDATORIO -->
-
-<section id="reminder" class="page">
-
-<h2>⏰ Toma agua</h2>
-
-<div class="card center">
-
-<h2>💧 Recordatorio</h2>
-
-<p>
-Elige cada cuánto quieres recibir un aviso.
-</p>
-
-<br>
-
-<select id="reminderSelect">
-
-<option value="30">
-Cada 30 minutos
-</option>
-
-<option value="60">
-Cada 1 hora
-</option>
-
-<option value="120">
-Cada 2 horas
-</option>
-
-</select>
-
-<br><br>
-
-<button class="primary"
-        onclick="saveReminder()">
-
-Guardar
-
-</button>
-
-<p id="reminderStatus"></p>
-
-</div>
-
-</section>
-
-<!-- HISTORIAL -->
-
-<section id="history" class="page">
-
-<h2>📊 Historial</h2>
-
-<div class="card">
-
-<p>
-Aquí aparecerán los registros guardados.
-</p>
-
-<div id="historyList"></div>
-
-</div>
-
-</section>
-
-<!-- PERFIL -->
-
-<section id="profile" class="page">
-
-<h2>👤 Perfil</h2>
-
-<div class="card center">
-
-<div style="font-size:90px">
-🐥
-</div>
-
-<h2 id="profileName">
-Usuario
-</h2>
-
-<p id="profileEmail"></p>
-
-<br>
-
-<h3>⚖️ Datos para el cálculo orientativo</h3>
-
-<br>
-
-<label>
-Peso en kg
-</label>
-
-<br><br>
-
-<input id="weight"
-       type="number"
-       min="1"
-       max="300"
-       placeholder="Peso">
-
-<br><br>
-
-<button class="primary"
-        onclick="calculateWater()">
-
-💧 Calcular orientación
-
-</button>
-
-<p id="waterCalculation"
-   style="margin-top:15px">
-</p>
-
-<p style="font-size:12px;margin-top:10px;color:#777">
-El resultado es solo orientativo y no sustituye una recomendación
-de un adulto responsable o profesional de salud.
-</p>
-
-<h3 style="margin-top:25px">
-🎨 Elige tu Luminece
-</h3>
-
-<div class="otters">
-
-<button class="otter selected"
-        onclick="chooseLuminece('🐥',this)">
-🐥
-</button>
-
-<button class="otter"
-        onclick="chooseLuminece('🐤',this)">
-🐤
-</button>
-
-<button class="otter"
-        onclick="chooseLuminece('🐣',this)">
-🐣
-</button>
-
-</div>
-
-</div>
 
 </section>
 
 </main>
 
-<!-- MENÚ -->
 
 <nav>
-
-<button onclick="showPage('home')">
-<span>🏠</span>
-Inicio
-</button>
-
-<button onclick="showPage('shop')">
-<span>🛍️</span>
-Tienda
-</button>
-
-<button onclick="showPage('wardrobe')">
-<span>👗</span>
-Armario
-</button>
-
-<button onclick="showPage('game')">
-<span>🎮</span>
-Juego
-</button>
-
-<button onclick="showPage('achievements')">
-<span>🏆</span>
-Logros
-</button>
-
-<button onclick="showPage('history')">
-<span>📊</span>
-Historial
-</button>
-
-<button onclick="showPage('profile')">
-<span>👤</span>
-Perfil
-</button>
-
+  <button onclick="showScreen('home')">🏠<br>Inicio</button>
+  <button onclick="showScreen('weight')">⚖️<br>Peso</button>
+  <button onclick="showScreen('game')">🎮<br>Juego</button>
+  <button onclick="showScreen('achievements')">🏆<br>Logros</button>
+  <button onclick="showScreen('history')">📊<br>Historial</button>
+  <button onclick="showScreen('profile')">👤<br>Perfil</button>
 </nav>
 
-</section>
 
 <script>
 
-/* =========================
-   DATOS
-========================= */
-
+let water = 0;
 let coins = 0;
-let glasses = 0;
-let streak = 0;
-let spectator = false;
+let streak = 1;
 
-let history = [];
-let owned = [];
-
-let timer = 60;
-let score = 0;
-
+let gameTime = 60;
+let gameScore = 0;
 let gameInterval;
 let dropInterval;
 
 
-/* =========================
-   TIENDA
-========================= */
+// CAMBIAR PANTALLA
+function showScreen(screen) {
 
-const items = {
+  document.querySelectorAll(".screen")
+    .forEach(s => s.classList.remove("active"));
 
-accessories:[
-
-{
-id:"tie",
-name:"Corbata",
-icon:"👔",
-price:30
-},
-
-{
-id:"glasses",
-name:"Lentes en la cabeza",
-icon:"🕶️",
-price:35
-},
-
-{
-id:"bows",
-name:"Dos rosones",
-icon:"🎀",
-price:40
-},
-
-{
-id:"float",
-name:"Flotador",
-icon:"🛟",
-price:50
-},
-
-{
-id:"chef",
-name:"Gorro de chef",
-icon:"👨‍🍳",
-price:45
-},
-
-{
-id:"flower",
-name:"Flor",
-icon:"🌸",
-price:35
-},
-
-{
-id:"umbrella",
-name:"Sombrilla",
-icon:"🏖️",
-price:60
-},
-
-{
-id:"bracelets",
-name:"Pulseras coloridas",
-icon:"📿",
-price:55
-}
-
-],
-
-female:[
-
-{
-id:"dress1",
-name:"Vestido 1",
-icon:"👗",
-price:80
-},
-
-{
-id:"dress2",
-name:"Vestido 2",
-icon:"👗",
-price:100
-},
-
-{
-id:"topSkirt",
-name:"Polo + falda",
-icon:"👚",
-price:85
-}
-
-],
-
-male:[
-
-{
-id:"shirt1",
-name:"Camisa manga larga",
-icon:"👔",
-price:80
-},
-
-{
-id:"shirt2",
-name:"Camisa de otro cuello",
-icon:"👔",
-price:90
-},
-
-{
-id:"polo",
-name:"Polo con cuello",
-icon:"👕",
-price:70
-},
-
-{
-id:"jacket",
-name:"Casaca de cuero",
-icon:"🧥",
-price:120
-}
-
-]
-
-};
-
-
-/* =========================
-   INICIO
-========================= */
-
-setTimeout(()=>{
-
-document.getElementById("splash")
-.classList.add("hidden");
-
-document.getElementById("login")
-.classList.remove("hidden");
-
-},2500);
-
-
-/* =========================
-   LOGIN
-========================= */
-
-function login(){
-
-const name=
-document.getElementById("nameInput")
-.value.trim();
-
-const email=
-document.getElementById("emailInput")
-.value.trim();
-
-const password=
-document.getElementById("passwordInput")
-.value;
-
-if(!name||!email||!password){
-
-alert("Completa nombre, correo y contraseña.");
-
-return;
-
-}
-
-spectator=false;
-
-document.getElementById("profileName")
-.textContent=name;
-
-document.getElementById("profileEmail")
-.textContent=email;
-
-openApp();
-
+  document.getElementById(screen)
+    .classList.add("active");
 }
 
 
-function spectatorMode(){
+// AGREGAR AGUA
+function addWater() {
 
-spectator=true;
+  water += 250;
+  coins += 5;
 
-document.getElementById("profileName")
-.textContent="Espectador";
+  updateWater();
 
-document.getElementById("profileEmail")
-.textContent=
-"Modo espectador";
-
-openApp();
-
+  saveData();
 }
 
 
-function openApp(){
+// ACTUALIZAR AGUA
+function updateWater() {
 
-document.getElementById("login")
-.classList.add("hidden");
+  document.getElementById("water").textContent = water;
+  document.getElementById("coins").textContent = coins;
 
-document.getElementById("app")
-.classList.remove("hidden");
+  const goal =
+    Number(document.getElementById("goal").textContent);
 
-shopCategory("accessories");
+  let percentage = (water / goal) * 100;
 
-updateUI();
+  if (percentage > 100)
+    percentage = 100;
 
+  document.getElementById("progress").style.width =
+    percentage + "%";
+
+  updateHistory();
 }
 
 
-/* =========================
-   NAVEGACIÓN
-========================= */
+// CALCULAR ORIENTACIÓN
+function calculateWater() {
 
-function showPage(id){
+  const weight =
+    Number(document.getElementById("weightInput").value);
 
-document.querySelectorAll(".page")
-.forEach(p=>p.classList.remove("active"));
+  if (!weight || weight <= 0) {
 
-document.getElementById(id)
-.classList.add("active");
+    document.getElementById("weightResult").innerHTML =
+      "Por favor escribe un peso válido.";
 
+    return;
+  }
+
+  /*
+    Solo una orientación general.
+    No sustituye una recomendación médica.
+  */
+
+  const result = Math.round(weight * 30);
+
+  document.getElementById("goal").textContent = result;
+
+  document.getElementById("weightResult").innerHTML =
+    "💧 Orientación aproximada: <strong>" +
+    result +
+    " ml al día</strong>.<br><br>" +
+    "Esta cifra es solo orientativa.";
 }
 
 
-/* =========================
-   AGUA
-========================= */
+// HISTORIAL
+function updateHistory() {
 
-function drinkWater(){
+  const list =
+    document.getElementById("historyList");
 
-if(spectator){
+  const today =
+    new Date().toLocaleDateString("es-PE");
 
-alert(
-"El modo espectador no guarda progreso."
-);
-
-return;
-
-}
-
-glasses++;
-
-coins+=5;
-
-const date=
-new Date()
-.toLocaleDateString("es-PE");
-
-history.push({
-
-date:date,
-glasses:glasses
-
-});
-
-updateUI();
-
-updateHistory();
-
+  list.innerHTML = `
+    <div class="history-item">
+      📅 ${today}
+      <br>
+      💧 ${water} ml
+      <br>
+      🪙 ${coins} AquaCoins
+    </div>
+  `;
 }
 
 
-/* =========================
-   ACTUALIZAR
-========================= */
+// PERFIL
+function saveProfile() {
 
-function updateUI(){
+  const name =
+    document.getElementById("nameInput").value.trim();
 
-document.getElementById("coins")
-.textContent=coins;
+  if (name !== "") {
 
-document.getElementById("homeCoins")
-.textContent=coins;
+    document.getElementById("profileName")
+      .textContent = name;
 
-document.getElementById("rewardCoins")
-.textContent=coins;
-
-document.getElementById("glasses")
-.textContent=glasses;
-
-const percent=
-Math.min((glasses/8)*100,100);
-
-document.getElementById("progress")
-.style.width=percent+"%";
-
-document.getElementById("streak")
-.textContent=streak;
-
+    localStorage.setItem("profileName", name);
+  }
 }
 
 
-/* =========================
-   TIENDA
-========================= */
+// GUARDAR DATOS
+function saveData() {
 
-function shopCategory(category){
-
-const container=
-document.getElementById("shopItems");
-
-container.innerHTML="";
-
-items[category].forEach(item=>{
-
-const div=
-document.createElement("div");
-
-div.className="item";
-
-const isOwned=
-owned.includes(item.id);
-
-div.innerHTML=`
-
-<div class="item-icon">
-${item.icon}
-</div>
-
-<h3>
-${item.name}
-</h3>
-
-<div class="price">
-🪙 ${item.price}
-</div>
-
-<button
-class="${isOwned?'owned':'buy'}"
-onclick="buyItem('${item.id}',${item.price})">
-
-${isOwned?'✓ Comprado':'Comprar'}
-
-</button>
-
-`;
-
-container.appendChild(div);
-
-});
-
+  localStorage.setItem("water", water);
+  localStorage.setItem("coins", coins);
+  localStorage.setItem("streak", streak);
 }
 
 
-/* =========================
-   COMPRAR
-========================= */
+// CARGAR DATOS
+function loadData() {
 
-function buyItem(id,price){
+  water =
+    Number(localStorage.getItem("water")) || 0;
 
-if(spectator){
+  coins =
+    Number(localStorage.getItem("coins")) || 0;
 
-alert(
-"El modo espectador no puede comprar."
-);
+  streak =
+    Number(localStorage.getItem("streak")) || 1;
 
-return;
+  const savedName =
+    localStorage.getItem("profileName");
 
-}
+  if (savedName) {
 
-if(owned.includes(id)){
+    document.getElementById("profileName")
+      .textContent = savedName;
 
-alert("Ya tienes este elemento.");
+    document.getElementById("nameInput")
+      .value = savedName;
+  }
 
-return;
+  document.getElementById("streak")
+    .textContent = streak + " día";
 
-}
-
-if(coins<price){
-
-alert(
-"No tienes suficientes AquaCoins."
-);
-
-return;
-
-}
-
-coins-=price;
-
-owned.push(id);
-
-updateUI();
-
-alert(
-"🎉 ¡Elemento desbloqueado!"
-);
-
+  updateWater();
 }
 
 
-/* =========================
-   ARMARIO
-========================= */
+// ============================
+// MINIJUEGO
+// ============================
 
-function changeClothing(){
+function startGame() {
 
-updateOutfit();
+  clearInterval(gameInterval);
+  clearInterval(dropInterval);
 
+  gameTime = 60;
+  gameScore = 0;
+
+  document.getElementById("gameTimer")
+    .textContent = gameTime;
+
+  document.getElementById("gameScore")
+    .textContent = gameScore;
+
+  document.getElementById("gameArea")
+    .innerHTML = "";
+
+  document.getElementById("startGameButton")
+    .disabled = true;
+
+  gameInterval = setInterval(() => {
+
+    gameTime--;
+
+    document.getElementById("gameTimer")
+      .textContent = gameTime;
+
+    if (gameTime <= 0) {
+
+      endGame();
+    }
+
+  }, 1000);
+
+
+  dropInterval = setInterval(createDrop, 700);
 }
 
 
-function updateOutfit(){
+function createDrop() {
 
-const clothing=
-document.getElementById("clothingSelect")
-.value;
+  const area =
+    document.getElementById("gameArea");
 
-const color=
-document.getElementById("clothingColor")
-.value;
+  const drop =
+    document.createElement("div");
 
-const accessory=
-document.getElementById("accessorySelect")
-.value;
+  drop.className = "waterDrop";
+  drop.textContent = "💧";
 
-const accessoryColor=
-document.getElementById("accessoryColor")
-.value;
+  drop.style.left =
+    Math.random() * 85 + "%";
 
-let clothes="✨";
+  drop.style.top =
+    Math.random() * 80 + "%";
 
-if(clothing==="shirt")
-clothes="👔";
+  drop.onclick = function() {
 
-if(clothing==="shirt2")
-clothes="👔";
+    gameScore++;
 
-if(clothing==="polo")
-clothes="👕";
+    document.getElementById("gameScore")
+      .textContent = gameScore;
 
-if(clothing==="dress1")
-clothes="👗";
+    drop.remove();
+  };
 
-if(clothing==="dress2")
-clothes="👗";
+  area.appendChild(drop);
 
-if(clothing==="topSkirt")
-clothes="👚";
+  setTimeout(() => {
 
-if(clothing==="jacket")
-clothes="🧥";
+    if (drop.parentElement)
+      drop.remove();
 
-let accessoryIcon="";
-
-if(accessory==="tie")
-accessoryIcon=" 👔";
-
-if(accessory==="glasses")
-accessoryIcon=" 🕶️";
-
-if(accessory==="bows")
-accessoryIcon=" 🎀";
-
-if(accessory==="float")
-accessoryIcon=" 🛟";
-
-if(accessory==="chef")
-accessoryIcon=" 👨‍🍳";
-
-if(accessory==="flower")
-accessoryIcon=" 🌸";
-
-if(accessory==="umbrella")
-accessoryIcon=" 🏖️";
-
-if(accessory==="bracelets")
-accessoryIcon=" 📿";
-
-const outfit=
-document.getElementById("outfit");
-
-outfit.textContent=
-clothes+accessoryIcon;
-
-outfit.style.color=color;
-
-document.getElementById("customMessage")
-.textContent=
-"✨ ¡Luminece está personalizado!";
-
+  }, 1200);
 }
 
 
-/* =========================
-   PERFIL
-========================= */
+function endGame() {
 
-function chooseLuminece(value,button){
+  clearInterval(gameInterval);
+  clearInterval(dropInterval);
 
-document
-.querySelectorAll(".otter")
-.forEach(x=>
-x.classList.remove("selected")
-);
+  document.getElementById("startGameButton")
+    .disabled = false;
 
-button.classList.add("selected");
+  coins += gameScore;
 
-document.getElementById("profileOtter");
+  document.getElementById("coins")
+    .textContent = coins;
 
-const mainAvatar=
-document.querySelector(".avatar");
+  document.getElementById("gameArea")
+    .innerHTML =
+    "<h2 style='padding-top:100px;'>🎉 ¡Terminaste!</h2>" +
+    "<p>Conseguiste " +
+    gameScore +
+    " puntos.</p>";
 
-mainAvatar.textContent=value;
-
+  saveData();
 }
 
 
-/* =========================
-   CÁLCULO ORIENTATIVO
-========================= */
-
-function calculateWater(){
-
-const weight=
-Number(
-document.getElementById("weight").value
-);
-
-if(!weight||weight<=0){
-
-document.getElementById(
-"waterCalculation"
-).textContent=
-"Escribe un peso válido.";
-
-return;
-
-}
-
-/*
-  No usamos una meta médica exacta.
-  Mostramos una orientación sencilla
-  y recomendamos consultar a un adulto
-  responsable/profesional para necesidades
-  individuales.
-*/
-
-const result=
-Math.round(weight*30);
-
-document.getElementById(
-"waterCalculation"
-).textContent=
-"Orientación aproximada: "+
-result+
-" mL al día. Las necesidades reales pueden variar.";
-
-}
-
-
-/* =========================
-   RECORDATORIO
-========================= */
-
-function saveReminder(){
-
-const minutes=
-document.getElementById("reminderSelect")
-.value;
-
-document.getElementById("reminderStatus")
-.textContent=
-"✓ Recordatorio guardado: cada "+
-minutes+
-" minutos.";
-
-}
-
-
-/* =========================
-   HISTORIAL
-========================= */
-
-function updateHistory(){
-
-const list=
-document.getElementById("historyList");
-
-if(history.length===0){
-
-list.innerHTML=
-"<p>Aún no hay registros.</p>";
-
-return;
-
-}
-
-list.innerHTML="";
-
-history
-.slice()
-.reverse()
-.forEach(item=>{
-
-const row=
-document.createElement("div");
-
-row.className="history-row";
-
-row.innerHTML=`
-
-<span>
-📅 ${item.date}
-</span>
-
-<strong>
-💧 ${item.glasses}
-</strong>
-
-`;
-
-list.appendChild(row);
-
-});
-
-}
-
-
-/* =========================
-   JUEGO DE 60 SEGUNDOS
-========================= */
-
-function startGame(){
-
-clearInterval(gameInterval);
-
-clearInterval(dropInterval);
-
-timer=60;
-
-score=0;
-
-document.getElementById("timer")
-.textContent=timer;
-
-document.getElementById("score")
-.textContent=score;
-
-document.getElementById("gameResult")
-.textContent="";
-
-document.getElementById("gameArea")
-.innerHTML="";
-
-const button=
-document.getElementById("startGame");
-
-button.disabled=true;
-
-button.textContent=
-"🎮 Jugando...";
-
-gameInterval=
-setInterval(()=>{
-
-timer--;
-
-document.getElementById("timer")
-.textContent=timer;
-
-if(timer<=0){
-
-finishGame();
-
-}
-
-},1000);
-
-dropInterval=
-setInterval(createDrop,700);
-
-}
-
-
-function createDrop(){
-
-const area=
-document.getElementById("gameArea");
-
-const drop=
-document.createElement("div");
-
-drop.className="drop";
-
-const special=
-Math.random()<0.15;
-
-drop.textContent=
-special?"💎💧":"💧";
-
-drop.style.left=
-Math.random()*85+"%";
-
-drop.style.top=
-Math.random()*75+"%";
-
-drop.onclick=()=>{
-
-score+=special?5:1;
-
-document.getElementById("score")
-.textContent=score;
-
-drop.remove();
-
-};
-
-area.appendChild(drop);
-
-setTimeout(()=>{
-
-if(drop.parentNode)
-drop.remove();
-
-},1800);
-
-}
-
-
-function finishGame(){
-
-clearInterval(gameInterval);
-
-clearInterval(dropInterval);
-
-document
-.querySelectorAll(".drop")
-.forEach(x=>x.remove());
-
-const button=
-document.getElementById("startGame");
-
-button.disabled=false;
-
-button.textContent=
-"▶️ Jugar otra vez";
-
-let reward=
-Math.min(
-Math.floor(score/5),
-20
-);
-
-if(spectator)
-reward=0;
-
-if(!spectator){
-
-coins+=reward;
-
-updateUI();
-
-}
-
-document.getElementById("gameResult")
-.innerHTML=`
-
-🎉 ¡Partida terminada!<br>
-
-Puntuación:
-<strong>${score}</strong><br>
-
-🪙 AquaCoins ganadas:
-<strong>${reward}</strong>
-
-`;
-
-}
-
-
-/* =========================
-   INICIALIZAR
-========================= */
-
-updateUI();
+// INICIAR
+loadData();
 
 </script>
 
