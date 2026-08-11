@@ -1,236 +1,1298 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#4fc3f7">
-  <title>Mi Agua 💧</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AquaCoin 💧</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(180deg, #dff6ff, #ffffff);
-      color: #174a63;
-      min-height: 100vh;
-    }
+body{
+  background:#eaf8ff;
+  color:#163247;
+  min-height:100vh;
+}
 
-    .app {
-      max-width: 520px;
-      margin: auto;
-      padding: 25px 18px;
-      text-align: center;
-    }
+button{
+  border:0;
+  border-radius:14px;
+  padding:11px 16px;
+  cursor:pointer;
+  font-weight:bold;
+}
 
-    h1 {
-      font-size: 38px;
-      margin: 10px 0;
-    }
+.hidden{display:none!important}
 
-    .subtitle {
-      font-size: 18px;
-      margin-bottom: 25px;
-    }
+.primary{
+  background:#078fd1;
+  color:white;
+  width:100%;
+}
 
-    .card {
-      background: white;
-      border-radius: 25px;
-      padding: 25px;
-      margin: 18px 0;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.10);
-    }
+.secondary{
+  background:#dff4ff;
+  color:#0877aa;
+}
 
-    .glass {
-      font-size: 55px;
-      margin: 10px;
-    }
+h1,h2,h3{color:#087bb5}
 
-    .amount {
-      font-size: 30px;
-      font-weight: bold;
-      margin: 10px;
-    }
+/* INICIO */
+#splash{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:white;
+  background:linear-gradient(180deg,#079de2,#bdefff);
+}
 
-    .progress-container {
-      width: 100%;
-      height: 22px;
-      background: #e4f1f5;
-      border-radius: 20px;
-      overflow: hidden;
-      margin: 20px 0;
-    }
+.logo{
+  font-size:48px;
+  font-weight:900;
+  letter-spacing:2px;
+}
 
-    .progress {
-      height: 100%;
-      width: 0%;
-      background: #4fc3f7;
-      border-radius: 20px;
-      transition: 0.3s;
-    }
+.lumi-big{
+  font-size:100px;
+  margin:20px;
+}
 
-    button {
-      border: none;
-      border-radius: 18px;
-      padding: 16px 25px;
-      font-size: 18px;
-      font-weight: bold;
-      cursor: pointer;
-      background: #4fc3f7;
-      color: white;
-      margin: 7px;
-    }
+#login{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
 
-    button:hover {
-      opacity: 0.85;
-    }
+.login-card{
+  background:white;
+  width:min(420px,100%);
+  padding:30px;
+  border-radius:25px;
+  box-shadow:0 8px 30px #55a9c633;
+  text-align:center;
+}
 
-    .reset {
-      background: #90a4ae;
-    }
+.login-card input{
+  width:100%;
+  padding:13px;
+  margin:7px 0;
+  border:2px solid #c9ebf8;
+  border-radius:12px;
+}
 
-    .reminder {
-      font-size: 18px;
-      line-height: 1.5;
-    }
+/* APP */
+#app{padding-bottom:85px}
 
-    .success {
-      font-weight: bold;
-      min-height: 25px;
-    }
-  </style>
+header{
+  position:sticky;
+  top:0;
+  z-index:10;
+  background:#078fd1;
+  color:white;
+  padding:15px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+header h2{color:white}
+
+.coins{
+  background:white;
+  color:#0877aa;
+  padding:8px 13px;
+  border-radius:20px;
+  font-weight:bold;
+}
+
+main{
+  max-width:950px;
+  margin:auto;
+  padding:20px;
+}
+
+.page{display:none}
+.page.active{display:block}
+
+.card{
+  background:white;
+  padding:22px;
+  border-radius:22px;
+  margin-bottom:18px;
+  box-shadow:0 4px 18px #55a9c622;
+}
+
+.center{text-align:center}
+
+.lumi{
+  font-size:95px;
+  margin:10px;
+}
+
+.progress{
+  height:18px;
+  background:#d7f1fb;
+  border-radius:20px;
+  overflow:hidden;
+  margin:15px 0;
+}
+
+.progress-bar{
+  height:100%;
+  width:0;
+  background:#079ddd;
+  transition:.3s;
+}
+
+.big-number{
+  font-size:38px;
+  color:#078fd1;
+  font-weight:bold;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.stat{
+  background:white;
+  padding:18px;
+  border-radius:18px;
+  text-align:center;
+}
+
+.stat strong{
+  display:block;
+  font-size:26px;
+  color:#087bb5;
+}
+
+/* TIENDA */
+.tabs{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin:15px 0;
+}
+
+.tabs button.active{
+  background:#078fd1;
+  color:white;
+}
+
+.shop-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+  gap:15px;
+}
+
+.item{
+  background:white;
+  border-radius:20px;
+  padding:18px;
+  text-align:center;
+}
+
+.item-icon{
+  font-size:60px;
+  margin:8px;
+}
+
+.price{
+  margin:8px;
+  color:#087bb5;
+  font-weight:bold;
+}
+
+.buy{
+  background:#078fd1;
+  color:white;
+}
+
+.owned{
+  background:#bdebcf;
+  color:#176839;
+}
+
+/* ARMARIO */
+.wardrobe{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+
+.avatar-box{
+  background:linear-gradient(#d9f6ff,#fff);
+  min-height:400px;
+  border-radius:25px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+
+.avatar{
+  position:relative;
+  font-size:100px;
+}
+
+.clothes-display{
+  font-size:55px;
+  margin-top:-20px;
+}
+
+.controls{
+  background:white;
+  border-radius:22px;
+  padding:20px;
+}
+
+.control{
+  margin:14px 0;
+}
+
+.control label{
+  display:block;
+  margin-bottom:6px;
+  font-weight:bold;
+}
+
+select,input[type=color]{
+  padding:9px;
+  border:2px solid #ccecf7;
+  border-radius:10px;
+}
+
+/* HISTORIAL */
+.history-row{
+  display:flex;
+  justify-content:space-between;
+  padding:12px 0;
+  border-bottom:1px solid #e1f2f8;
+}
+
+/* PERFIL */
+.otters{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin:20px;
+}
+
+.otter{
+  font-size:38px;
+  background:#edf9ff;
+  border:3px solid transparent;
+}
+
+.otter.selected{
+  border-color:#078fd1;
+}
+
+/* JUEGO */
+.game{
+  background:linear-gradient(#8ddfff,#e8faff);
+  min-height:450px;
+  border-radius:25px;
+  position:relative;
+  overflow:hidden;
+  text-align:center;
+  padding:15px;
+}
+
+.timer{
+  font-size:32px;
+  color:#087bb5;
+  font-weight:bold;
+}
+
+#gameArea{
+  position:absolute;
+  inset:80px 0 0;
+}
+
+.drop{
+  position:absolute;
+  font-size:38px;
+  cursor:pointer;
+  user-select:none;
+}
+
+#startGame{
+  position:absolute;
+  bottom:15px;
+  left:10%;
+  width:80%;
+}
+
+/* MENÚ */
+nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:white;
+  display:flex;
+  justify-content:space-around;
+  z-index:20;
+  box-shadow:0 -5px 20px #55a9c633;
+}
+
+nav button{
+  background:transparent;
+  color:#0877aa;
+  font-size:11px;
+}
+
+nav span{
+  display:block;
+  font-size:20px;
+}
+
+/* RESPONSIVE */
+@media(max-width:700px){
+  .wardrobe{grid-template-columns:1fr}
+  nav button{padding:7px 4px}
+}
+</style>
 </head>
 
 <body>
 
-  <div class="app">
+<!-- PANTALLA DE INICIO -->
+<section id="splash">
+  <div class="logo">AQUACOIN</div>
+  <div class="lumi-big">🦦💧</div>
+  <h2 style="color:white">Luminese te espera</h2>
+  <p>Tu agua · tus AquaCoins · tu Lumi</p>
+</section>
 
-    <h1>💧 Mi Agua</h1>
-    <div class="subtitle">
-      ¡Recuerda mantenerte hidratado!
+<!-- LOGIN -->
+<section id="login" class="hidden">
+  <div class="login-card">
+    <h1>💧 AquaCoin</h1>
+    <p style="margin:10px">Crea tu perfil</p>
+
+    <input id="nameInput" placeholder="Nombre">
+    <input id="emailInput" type="email" placeholder="Correo electrónico">
+    <input id="passwordInput" type="password" placeholder="Contraseña">
+
+    <button class="primary" onclick="login()">Crear / entrar</button>
+
+    <br><br>
+
+    <button class="secondary" onclick="spectatorMode()">
+      👀 Entrar como espectador
+    </button>
+  </div>
+</section>
+
+<!-- APP -->
+<section id="app" class="hidden">
+
+<header>
+  <h2>💧 AquaCoin</h2>
+  <div class="coins">🪙 <span id="coins">0</span></div>
+</header>
+
+<main>
+
+<!-- INICIO -->
+<section id="home" class="page active">
+
+  <div class="card center">
+    <div class="lumi">🦦</div>
+    <h2>¡Hola! Soy Luminese</h2>
+    <p>Vamos a cuidar tu registro de agua.</p>
+  </div>
+
+  <div class="card center">
+    <h2>💧 Vasos de hoy</h2>
+
+    <div class="big-number">
+      <span id="glasses">0</span> / 8
     </div>
 
-    <div class="card">
-
-      <div class="glass">🥤</div>
-
-      <div class="amount">
-        <span id="current">0</span> / <span id="goal">6</span> vasos
-      </div>
-
-      <div class="progress-container">
-        <div class="progress" id="progress"></div>
-      </div>
-
-      <p>
-        Te faltan <strong><span id="remaining">6</span></strong> vasos.
-      </p>
-
-      <button onclick="addWater()">
-        💧 Tomé un vaso
-      </button>
-
-      <button class="reset" onclick="resetWater()">
-        🔄 Reiniciar
-      </button>
-
-      <p class="success" id="message"></p>
-
+    <div class="progress">
+      <div class="progress-bar" id="progress"></div>
     </div>
 
-    <div class="card reminder">
+    <button class="primary" onclick="drinkWater()">
+      💧 Registrar vaso
+    </button>
+  </div>
 
-      <h2>⏰ Recordatorio</h2>
+  <div class="stats">
 
-      <p>
-        Es importante recordar tomar agua durante el día.
-      </p>
+    <div class="stat">
+      🔥 Racha
+      <strong id="streak">0</strong>
+      días
+    </div>
 
-      <p>
-        🔔 Próximo recordatorio:
-        <strong id="time">--:--</strong>
-      </p>
-
-      <button onclick="setReminder()">
-        🔔 Activar recordatorio
-      </button>
-
+    <div class="stat">
+      🪙 AquaCoins
+      <strong id="homeCoins">0</strong>
     </div>
 
   </div>
 
-  <script>
+</section>
 
-    let current = 0;
-    const goal = 6;
+<!-- TIENDA -->
+<section id="shop" class="page">
 
-    function updateScreen() {
+<h2>🛍️ AquaCoin Shop</h2>
+<p>Compra ropa y accesorios para Luminese.</p>
 
-      document.getElementById("current").textContent = current;
+<div class="tabs">
+  <button onclick="shopCategory('accessories')">✨ Accesorios</button>
+  <button onclick="shopCategory('female')">👗 Femenino</button>
+  <button onclick="shopCategory('male')">👔 Masculino</button>
+</div>
 
-      document.getElementById("remaining").textContent =
-        Math.max(goal - current, 0);
+<div id="shopItems" class="shop-grid"></div>
 
-      let percentage = Math.min((current / goal) * 100, 100);
+</section>
 
-      document.getElementById("progress").style.width =
-        percentage + "%";
+<!-- ARMARIO -->
+<section id="wardrobe" class="page">
 
-      if (current >= goal) {
+<h2>👗 Armario de Luminese</h2>
 
-        document.getElementById("message").textContent =
-          "🎉 ¡Meta cumplida! ¡Muy bien!";
+<div class="wardrobe">
 
-      } else {
+<div class="avatar-box">
 
-        document.getElementById("message").textContent =
-          "";
+  <div id="avatar" class="avatar">🦦</div>
 
-      }
-    }
+  <div id="clothesDisplay" class="clothes-display">
+    ✨
+  </div>
 
-    function addWater() {
+  <h3 id="outfitName">Luminese</h3>
 
-      if (current < goal) {
-        current++;
-      }
+</div>
 
-      updateScreen();
-    }
+<div class="controls">
 
-    function resetWater() {
+  <h3>🎨 Personalizar</h3>
 
-      current = 0;
+  <div class="control">
+    <label>Ropa</label>
 
-      updateScreen();
-    }
+    <select id="clothingSelect" onchange="changeClothing()">
+      <option value="none">Sin ropa</option>
+      <option value="shirt">Camisa</option>
+      <option value="tshirt">Polo</option>
+      <option value="dress">Vestido</option>
+      <option value="skirt">Polo + falda</option>
+      <option value="jacket">Casaca de cuero</option>
+    </select>
+  </div>
 
-    function setReminder() {
+  <div class="control">
+    <label>Color</label>
+    <input type="color" id="colorPicker" value="#078fd1"
+           onchange="changeColor()">
+  </div>
 
-      const now = new Date();
+  <div class="control">
+    <label>Accesorio</label>
 
-      now.setMinutes(now.getMinutes() + 60);
+    <select id="accessorySelect" onchange="changeAccessory()">
+      <option value="none">Ninguno</option>
+      <option value="tie">Corbata</option>
+      <option value="glasses">Lentes en la cabeza</option>
+      <option value="bows">Dos rosones</option>
+      <option value="float">Flotador</option>
+      <option value="chef">Gorro de chef</option>
+      <option value="flower">Flor</option>
+      <option value="umbrella">Sombrilla</option>
+      <option value="bracelets">Pulseras coloridas</option>
+    </select>
+  </div>
 
-      const hours =
-        String(now.getHours()).padStart(2, "0");
+  <div class="control">
+    <label>Color del accesorio</label>
+    <input type="color" id="accessoryColor"
+           value="#ff4fa3"
+           onchange="changeAccessoryColor()">
+  </div>
 
-      const minutes =
-        String(now.getMinutes()).padStart(2, "0");
+  <p id="customMessage"></p>
 
-      document.getElementById("time").textContent =
-        hours + ":" + minutes;
+</div>
+</div>
+</section>
 
-      alert(
-        "🔔 Recordatorio activado. Recuerda tomar agua."
-      );
-    }
+<!-- JUEGO -->
+<section id="game" class="page">
 
-    updateScreen();
+<h2>🎮 Ayuda a Luminese</h2>
+<p>¡Toca las gotas durante 60 segundos!</p>
 
-  </script>
+<div class="game">
+
+  <div class="timer">
+    ⏱️ <span id="timer">60</span>
+  </div>
+
+  <p>
+    💧 Puntos:
+    <strong id="score">0</strong>
+  </p>
+
+  <div id="gameArea"></div>
+
+  <button id="startGame" class="primary" onclick="startGame()">
+    ▶️ Empezar partida
+  </button>
+
+</div>
+
+<p id="gameResult" class="center" style="margin:15px"></p>
+
+</section>
+
+<!-- LOGROS -->
+<section id="achievements" class="page">
+
+<h2>🏆 Logros y recompensas</h2>
+
+<div class="card">
+  <h3>💧 Primer vaso</h3>
+  <p>Registra tu primer vaso.</p>
+  <strong>+10 AquaCoins</strong>
+</div>
+
+<div class="card">
+  <h3>🔥 7 días</h3>
+  <p>Consigue una racha de 7 días.</p>
+  <strong>+50 AquaCoins</strong>
+</div>
+
+<div class="card">
+  <h3>🌊 100 vasos</h3>
+  <p>Registra 100 vasos.</p>
+  <strong>+100 AquaCoins</strong>
+</div>
+
+<div class="card">
+  <h3>🌊 500 vasos</h3>
+  <p>Registra 500 vasos.</p>
+  <strong>+250 AquaCoins</strong>
+</div>
+
+</section>
+
+<!-- RECOMPENSAS -->
+<section id="rewards" class="page">
+
+<h2>🎁 Recompensas</h2>
+
+<div class="card center">
+
+  <div style="font-size:80px">🪙</div>
+
+  <h2>
+    <span id="rewardCoins">0</span> AquaCoins
+  </h2>
+
+  <p>
+    Usa tus monedas para desbloquear elementos de Luminese.
+  </p>
+
+</div>
+
+</section>
+
+<!-- RECORDATORIO -->
+<section id="reminder" class="page">
+
+<h2>⏰ Toma agua</h2>
+
+<div class="card center">
+
+  <h2>💧 Recordatorio</h2>
+
+  <p>Elige cada cuánto quieres recibir un aviso.</p>
+
+  <br>
+
+  <select id="reminderSelect">
+    <option value="30">Cada 30 minutos</option>
+    <option value="60">Cada 1 hora</option>
+    <option value="120">Cada 2 horas</option>
+  </select>
+
+  <br><br>
+
+  <button class="primary" onclick="saveReminder()">
+    Guardar
+  </button>
+
+  <p id="reminderStatus"></p>
+
+</div>
+
+</section>
+
+<!-- HISTORIAL -->
+<section id="history" class="page">
+
+<h2>📊 Historial</h2>
+
+<div class="card">
+
+  <p>
+    Aquí se podrán consultar los registros guardados
+    durante hasta un año.
+  </p>
+
+  <div id="historyList"></div>
+
+</div>
+
+</section>
+
+<!-- PERFIL -->
+<section id="profile" class="page">
+
+<h2>👤 Perfil</h2>
+
+<div class="card center">
+
+  <div id="profileOtter" style="font-size:90px">🦦</div>
+
+  <h2 id="profileName">Usuario</h2>
+  <p id="profileEmail"></p>
+
+  <h3 style="margin-top:20px">
+    🎨 Elige tu Luminese
+  </h3>
+
+  <div class="otters">
+
+    <button class="otter selected"
+            onclick="chooseOtter('🦦',this)">🦦</button>
+
+    <button class="otter"
+            onclick="chooseOtter('🤎🦦',this)">🤎🦦</button>
+
+    <button class="otter"
+            onclick="chooseOtter('💙🦦',this)">💙🦦</button>
+
+    <button class="otter"
+            onclick="chooseOtter('💜🦦',this)">💜🦦</button>
+
+    <button class="otter"
+            onclick="chooseOtter('💚🦦',this)">💚🦦</button>
+
+  </div>
+
+</div>
+
+</section>
+
+</main>
+
+<!-- MENÚ -->
+<nav>
+
+<button onclick="showPage('home')">
+<span>🏠</span>Inicio
+</button>
+
+<button onclick="showPage('shop')">
+<span>🛍️</span>Tienda
+</button>
+
+<button onclick="showPage('wardrobe')">
+<span>👗</span>Armario
+</button>
+
+<button onclick="showPage('game')">
+<span>🎮</span>Juego
+</button>
+
+<button onclick="showPage('achievements')">
+<span>🏆</span>Logros
+</button>
+
+<button onclick="showPage('history')">
+<span>📊</span>Historial
+</button>
+
+<button onclick="showPage('profile')">
+<span>👤</span>Perfil
+</button>
+
+</nav>
+
+</section>
+
+<script>
+
+/* =========================
+   DATOS
+========================= */
+
+let coins = 0;
+let glasses = 0;
+let streak = 0;
+let spectator = false;
+
+let history = [];
+let owned = [];
+
+let clothing = "none";
+let clothingColor = "#078fd1";
+
+let accessory = "none";
+let accessoryColor = "#ff4fa3";
+
+let timer = 60;
+let score = 0;
+let gameInterval;
+let dropInterval;
+
+
+/* =========================
+   TIENDA
+========================= */
+
+const items = {
+
+ accessories: [
+
+  {id:"tie",name:"Corbata",icon:"👔",price:30},
+  {id:"glasses",name:"Lentes en la cabeza",icon:"🕶️",price:35},
+  {id:"bows",name:"Dos rosones",icon:"🎀",price:40},
+  {id:"float",name:"Flotador",icon:"🛟",price:50},
+  {id:"chef",name:"Gorro de chef",icon:"👨‍🍳",price:45},
+  {id:"flower",name:"Flor",icon:"🌸",price:35},
+  {id:"umbrella",name:"Sombrilla",icon:"🏖️",price:60},
+  {id:"bracelets",name:"Pulseras coloridas",icon:"📿",price:55}
+
+ ],
+
+ female: [
+
+  {id:"dress1",name:"Vestido clásico",icon:"👗",price:80},
+  {id:"dress2",name:"Vestido elegante",icon:"👗",price:100},
+  {id:"topSkirt",name:"Polo + falda",icon:"👚",price:85}
+
+ ],
+
+ male: [
+
+  {id:"shirt1",name:"Camisa manga larga",icon:"👔",price:80},
+  {id:"shirt2",name:"Camisa con otro cuello",icon:"👔",price:90},
+  {id:"poloCollar",name:"Polo con cuello",icon:"👕",price:70},
+  {id:"leather",name:"Casaca de cuero",icon:"🧥",price:120}
+
+ ]
+
+};
+
+
+/* =========================
+   PANTALLA INICIAL
+========================= */
+
+setTimeout(()=>{
+
+ document.getElementById("splash").classList.add("hidden");
+ document.getElementById("login").classList.remove("hidden");
+
+},2500);
+
+
+/* =========================
+   LOGIN
+========================= */
+
+function login(){
+
+ const name =
+ document.getElementById("nameInput").value.trim();
+
+ const email =
+ document.getElementById("emailInput").value.trim();
+
+ const password =
+ document.getElementById("passwordInput").value;
+
+ if(!name || !email || !password){
+
+   alert("Completa nombre, correo y contraseña.");
+   return;
+
+ }
+
+ spectator=false;
+
+ document.getElementById("profileName").textContent=name;
+ document.getElementById("profileEmail").textContent=email;
+
+ openApp();
+}
+
+
+function spectatorMode(){
+
+ spectator=true;
+
+ document.getElementById("profileName").textContent=
+ "Espectador";
+
+ document.getElementById("profileEmail").textContent=
+ "Modo espectador";
+
+ openApp();
+}
+
+
+function openApp(){
+
+ document.getElementById("login").classList.add("hidden");
+ document.getElementById("app").classList.remove("hidden");
+
+ shopCategory("accessories");
+ updateUI();
+}
+
+
+/* =========================
+   NAVEGACIÓN
+========================= */
+
+function showPage(id){
+
+ document.querySelectorAll(".page")
+ .forEach(p=>p.classList.remove("active"));
+
+ document.getElementById(id)
+ .classList.add("active");
+}
+
+
+/* =========================
+   AGUA
+========================= */
+
+function drinkWater(){
+
+ if(spectator){
+
+   alert("El modo espectador no guarda progreso.");
+   return;
+
+ }
+
+ glasses++;
+ coins+=5;
+
+ const date=
+ new Date().toLocaleDateString("es-PE");
+
+ history.push({
+   date:date,
+   glasses:glasses
+ });
+
+ updateUI();
+ updateHistory();
+}
+
+
+function updateUI(){
+
+ document.getElementById("coins").textContent=coins;
+ document.getElementById("homeCoins").textContent=coins;
+ document.getElementById("rewardCoins").textContent=coins;
+
+ document.getElementById("glasses").textContent=glasses;
+
+ const percent=
+ Math.min((glasses/8)*100,100);
+
+ document.getElementById("progress").style.width=
+ percent+"%";
+
+ document.getElementById("streak").textContent=
+ streak;
+}
+
+
+/* =========================
+   TIENDA
+========================= */
+
+function shopCategory(category){
+
+ const container=
+ document.getElementById("shopItems");
+
+ container.innerHTML="";
+
+ items[category].forEach(item=>{
+
+   const div=document.createElement("div");
+
+   div.className="item";
+
+   const isOwned=
+   owned.includes(item.id);
+
+   div.innerHTML=`
+
+     <div class="item-icon">
+       ${item.icon}
+     </div>
+
+     <h3>${item.name}</h3>
+
+     <div class="price">
+       🪙 ${item.price}
+     </div>
+
+     <button
+       class="${isOwned?'owned':'buy'}"
+       onclick="buyItem('${item.id}',${item.price})">
+
+       ${isOwned?'✓ Comprado':'Comprar'}
+
+     </button>
+   `;
+
+   container.appendChild(div);
+
+ });
+}
+
+
+function buyItem(id,price){
+
+ if(spectator){
+
+   alert("El modo espectador no puede comprar.");
+   return;
+
+ }
+
+ if(owned.includes(id)){
+
+   alert("Ya tienes este elemento.");
+   return;
+
+ }
+
+ if(coins<price){
+
+   alert("No tienes suficientes AquaCoins.");
+   return;
+
+ }
+
+ coins-=price;
+
+ owned.push(id);
+
+ updateUI();
+
+ alert("🎉 ¡Elemento desbloqueado!");
+
+ shopCategory("accessories");
+}
+
+
+/* =========================
+   ARMARIO
+========================= */
+
+function changeClothing(){
+
+ clothing=
+ document.getElementById("clothingSelect").value;
+
+ updateAvatar();
+}
+
+
+function changeColor(){
+
+ clothingColor=
+ document.getElementById("colorPicker").value;
+
+ updateAvatar();
+}
+
+
+function changeAccessory(){
+
+ accessory=
+ document.getElementById("accessorySelect").value;
+
+ updateAvatar();
+}
+
+
+function changeAccessoryColor(){
+
+ accessoryColor=
+ document.getElementById("accessoryColor").value;
+
+ updateAvatar();
+}
+
+
+function updateAvatar(){
+
+ const clothes=
+ document.getElementById("clothesDisplay");
+
+ const outfitName=
+ document.getElementById("outfitName");
+
+ let symbol="✨";
+
+ if(clothing==="shirt") symbol="👔";
+ if(clothing==="tshirt") symbol="👕";
+ if(clothing==="dress") symbol="👗";
+ if(clothing==="skirt") symbol="👚";
+ if(clothing==="jacket") symbol="🧥";
+
+ clothes.textContent=symbol;
+
+ clothes.style.color=clothingColor;
+
+ let accessorySymbol="";
+
+ if(accessory==="tie") accessorySymbol=" 👔";
+ if(accessory==="glasses") accessorySymbol=" 🕶️";
+ if(accessory==="bows") accessorySymbol=" 🎀";
+ if(accessory==="float") accessorySymbol=" 🛟";
+ if(accessory==="chef") accessorySymbol=" 👨‍🍳";
+ if(accessory==="flower") accessorySymbol=" 🌸";
+ if(accessory==="umbrella") accessorySymbol=" 🏖️";
+ if(accessory==="bracelets") accessorySymbol=" 📿";
+
+ clothes.textContent=
+ symbol+accessorySymbol;
+
+ clothes.style.color=clothingColor;
+
+ outfitName.textContent=
+ "Luminese";
+
+ document.getElementById("customMessage").textContent=
+ "✨ Personalización aplicada";
+}
+
+
+/* =========================
+   PERFIL
+========================= */
+
+function chooseOtter(otter,button){
+
+ document
+ .querySelectorAll(".otter")
+ .forEach(x=>x.classList.remove("selected"));
+
+ button.classList.add("selected");
+
+ document.getElementById("profileOtter")
+ .textContent=otter;
+}
+
+
+/* =========================
+   RECORDATORIO
+========================= */
+
+function saveReminder(){
+
+ const minutes=
+ document.getElementById("reminderSelect").value;
+
+ document.getElementById("reminderStatus")
+ .textContent=
+ "✓ Recordatorio guardado: cada "+
+ minutes+" minutos.";
+}
+
+
+/* =========================
+   HISTORIAL
+========================= */
+
+function updateHistory(){
+
+ const list=
+ document.getElementById("historyList");
+
+ if(history.length===0){
+
+   list.innerHTML="<p>Aún no hay registros.</p>";
+   return;
+ }
+
+ list.innerHTML="";
+
+ history.slice().reverse().forEach(item=>{
+
+   const row=
+   document.createElement("div");
+
+   row.className="history-row";
+
+   row.innerHTML=`
+     <span>📅 ${item.date}</span>
+     <strong>💧 ${item.glasses}</strong>
+   `;
+
+   list.appendChild(row);
+ });
+}
+
+
+/* =========================
+   JUEGO — 60 SEGUNDOS
+========================= */
+
+function startGame(){
+
+ clearInterval(gameInterval);
+ clearInterval(dropInterval);
+
+ timer=60;
+ score=0;
+
+ document.getElementById("timer").textContent=timer;
+ document.getElementById("score").textContent=score;
+ document.getElementById("gameResult").textContent="";
+
+ const area=
+ document.getElementById("gameArea");
+
+ area.innerHTML="";
+
+ const button=
+ document.getElementById("startGame");
+
+ button.disabled=true;
+ button.textContent="🎮 Jugando...";
+
+ gameInterval=setInterval(()=>{
+
+   timer--;
+
+   document.getElementById("timer")
+   .textContent=timer;
+
+   if(timer<=0){
+
+     finishGame();
+   }
+
+ },1000);
+
+ dropInterval=
+ setInterval(createDrop,700);
+}
+
+
+function createDrop(){
+
+ const area=
+ document.getElementById("gameArea");
+
+ const drop=
+ document.createElement("div");
+
+ drop.className="drop";
+
+ const special=
+ Math.random()<0.15;
+
+ drop.textContent=
+ special?"💎💧":"💧";
+
+ drop.style.left=
+ Math.random()*85+"%";
+
+ drop.style.top=
+ Math.random()*75+"%";
+
+ drop.onclick=()=>{
+
+   score+=special?5:1;
+
+   document.getElementById("score")
+   .textContent=score;
+
+   drop.remove();
+ };
+
+ area.appendChild(drop);
+
+ setTimeout(()=>{
+
+   if(drop.parentNode)
+   drop.remove();
+
+ },1800);
+}
+
+
+function finishGame(){
+
+ clearInterval(gameInterval);
+ clearInterval(dropInterval);
+
+ document.querySelectorAll(".drop")
+ .forEach(x=>x.remove());
+
+ const button=
+ document.getElementById("startGame");
+
+ button.disabled=false;
+ button.textContent="▶️ Jugar otra vez";
+
+ let reward=
+ Math.min(Math.floor(score/5),20);
+
+ if(spectator)
+ reward=0;
+
+ if(!spectator){
+
+   coins+=reward;
+   updateUI();
+
+ }
+
+ document.getElementById("gameResult")
+ .innerHTML=
+ `
+ 🎉 ¡Partida terminada!<br>
+ Puntuación: <strong>${score}</strong><br>
+ 🪙 AquaCoins ganadas: <strong>${reward}</strong>
+ `;
+}
+
+</script>
 
 </body>
 </html>
